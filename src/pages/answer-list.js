@@ -36,12 +36,12 @@ class AnswerListPage extends Component {
 		     <Row className='answers-wrapper'>
 				<Col>
 			     {answers.map(function(item, index){
-                    return<Button className='answer-item' key={item.id}  
+                    return <Button className='answer-item' key={item.id}  
 					   onClick={(e) => { 
 							self.nextQuestion(item);
 						  }}>
 						{item.title}
-					</Button>;
+					  </Button>
                   })}
 				</Col>
 			 </Row>

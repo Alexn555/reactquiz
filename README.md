@@ -64,15 +64,15 @@ This will run the client at localhost:3000
      Scheme:  
 	   Contents
 	    pages - pages of application
-	    actions - redux signals that help call other components
-	    components - required for pages components
+	    actions - redux actions (send signals to get data to server)
+	    components - parts, that are required for pages
 		types - enums, lists, constants
-	    reducers - redux building blocks of handling state change with business logic
+	    reducers - redux building blocks of handling state change with business logic (gets data from server)
 	    utils - utility classes like date parser, object handler
 		App.js - main page declaration and volume toggle
 	    store.js - redux store
 	    index.js - starting point whole application
-	    setupTests - setuo enzyme adapter
+	    setupTests - setup enzyme adapter
 		tests are spread among folders 
 		
 		App ->  choose-quiz is entry point page where you select username, quiz  
@@ -81,7 +81,8 @@ This will run the client at localhost:3000
 		          after you picked all answers -> result page where is summary report with total score
 			
 		  Answer page -> gets quizId, question id as properties, shows the possible answers in which one is the correct one 
-		
+		                 when clicked on answer -> send back to parent (question-page) the answer and question page will set next question
+						 
 		  Progress bar -> gets currentItemIndex, count of items as properties to get raw procentage and show it as css bar
 		  
 		  Result page -> gets quizId, username, answers as properties and shows the summary with total score
