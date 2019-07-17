@@ -86,6 +86,8 @@ This will run the client at localhost:3000
 		  
 		  Result page -> gets quizId, username, answers as properties and shows the summary with total score
 		  
+		  QuizError component -> shows error if data not loading, rejected or some other error occurs
+		  
 				You also can adjust width, so in mobile app looks, answer items place accordning to width and looks good.
 		    
 	   

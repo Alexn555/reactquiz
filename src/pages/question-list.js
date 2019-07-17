@@ -22,7 +22,6 @@ class QuestionListPage extends Component {
    }
 
    componentDidMount() {
-	  console.log(' --> username ', this.props.username + ' quiz id ' + this.props.quizId);
 	  this.setState({ quizId: this.props.quizId });
 	  const quizId = this.props.quizId; //todo get from cookie 
       this.props.fetchQuestions(quizId);

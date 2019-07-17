@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom'
 
 import QuizError from '../components/quiz-error/quiz-error';
 import { fetchQuizzes } from '../actions/quiz-actions';
@@ -8,24 +7,39 @@ import QuestionListPage from '../pages/question-list';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../components/question-list/question-list.scss';
-import { Form, InputGroup, Row, Col, Dropdown, DropdownButton, Button } from 'react-bootstrap';
+import { Form, FormGroup, FormControl, FormLabel, InputGroup, Row, Col,
+  DropdownButton, DropdownItem, Button } from 'react-bootstrap';
 
 
 class ChoozeQuizPage extends Component {
 
-   state = {
- 	  screenWidth: 0,
-	  isQuizChoosen: false
-   }
+    state = {
+ 	   screenWidth: 0,
+	   isQuizChoosen: false,
+	   username: '',
+	   quizId: 0
+    }
  
-   componentDidMount() {	 
-	  this.setState({ isQuizChoosen: false });
-	  console.log(' ---> choose quiz ', this.state.isQuizChoosen);
-      this.props.fetchQuizzes();
-   }
+    componentDidMount() {	 
+	    this.setState({ isQuizChoosen: false });
+        this.props.fetchQuizzes();
+    }
+   
+    handleChange = event => {
+        this.setState({ [event.target.id]: event.target.value });
+    }
+	
+	handleSelect = (evtKey, evt) => {
+		this.setState({ quizId: evtKey });
+	}
+	
+	validateForm() {
+        return this.state.username.length > 0 && this.state.quizId > 0;
+    }
   
-   showTab() {
+    showTab() {
 	   const quizzes = this.props.quizzes;
+	   const quizTitle = this.state.quizId > 0 ? 'Quiz ' + this.state.quizId : 'Select quiz';
 	   
 	   if (!this.state.isQuizChoosen) {
          return (
@@ -36,35 +50,36 @@ class ChoozeQuizPage extends Component {
 			<Row>
 				<Col md='6'> 
 					 <Form>
-						  <Form.Group controlId="formUsername">
-							<Form.Label>Username</Form.Label>
-							<Form.Control type="text" placeholder="Username" />
-							<Form.Text className="text-muted">
-							  Minimum 3 symbols
-							</Form.Text>
-						  </Form.Group>
+						  <FormGroup controlId="username">
+							<FormLabel>Username</FormLabel>
+							<FormControl
+								autoFocus
+								type="text"
+								value={this.state.username}
+								onChange={this.handleChange}
+							/>
+						  </FormGroup>
 
-						  <Form.Group controlId="formSelectQuiz">
+						  <FormGroup controlId="formSelectQuiz">
 							<DropdownButton
 							  as={InputGroup.Append}
+							  onSelect={this.handleSelect}
 							  variant="outline-secondary"
-							  title="Dropdown"
+							  title={quizTitle}
 							  id="input-quizzes"
 							>
-							  <Dropdown.Item href="#">Quiz 141 | Games </Dropdown.Item>
-							  <Dropdown.Item href="#">Quiz 169 | Numbers </Dropdown.Item>
+							  {quizzes.map(function(item, index){
+								return  <DropdownItem key={item.id} eventKey={item.id} href="#">Quiz {item.id} | {item.title}
+									</DropdownItem>;
+						      })}
 							</DropdownButton>
-						  </Form.Group>
-	
-						   <Button variant="primary" type="submit">
-							 Submit
-						  </Button>
+						  </FormGroup>
 						</Form>
 				</Col>
 			</Row>
 			<Row>
 				<Col md='12'>
-					<Button variant="outline-info" className='start-quiz' value="full-list"
+					<Button variant="outline-info" className='start-quiz' value="full-list" disabled={!this.validateForm()}
 						onClick={(e) => { 
 						   this.startQuiz();
 						}}>Start</Button>
@@ -75,19 +90,15 @@ class ChoozeQuizPage extends Component {
 		  return this.renderRedirect();
 	  }
    }
+  
    
    startQuiz() {
-	   console.log(' start ');
 	   this.setState({ isQuizChoosen: true });
    }
    
    renderRedirect() {
 	 if (this.state.isQuizChoosen) { //refresh to select row
-		/*return <Redirect to={
-			pathname: '/questions',
-	        state: { username: 'Alex', quizId: 141 }} /> */
-		//return <Redirect to='/questions' />
-		return <QuestionListPage username='Alex' quizId='141' />
+		return <QuestionListPage username={this.state.username} quizId={this.state.quizId} />
 	 }
    }
 

@@ -4,7 +4,6 @@ import NumberHelper from '../utils/number-helper';
 
 import QuizError from '../components/quiz-error/quiz-error';
 import { fetchResult } from '../actions/quiz-actions';
-
 import ChoozeQuizPage from '../pages/choose-quiz';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,7 +15,8 @@ import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 class ResultPage extends Component {
 
    state = {
-	   showHomePage: false
+	   showHomePage: false,
+	   usePlainRefresh: true
    }
 
    componentDidMount() {	 
@@ -29,6 +29,8 @@ class ResultPage extends Component {
 	   const username = this.props.username;
 	   const result = this.props.result;
 	   const correctProcentage = NumberHelper.getProcentage(result.correct, result.total);
+	   
+	   const starEarn = correctProcentage > 50 ? <FaStar />: <div></div>;
 
 	   if (!this.state.showHomePage) {
 		   return (
@@ -43,7 +45,11 @@ class ResultPage extends Component {
 					</Col>
 					<Col md='6'>
   					 score:
-					<span className={this.getProcentageColor(correctProcentage)}> {correctProcentage} % </span> </Col>
+					 <span className={this.getProcentageColor(correctProcentage)}> 
+					  {correctProcentage} % 
+					 </span> 
+					  &nbsp; {starEarn} 
+					</Col>
 				 </Row>
 				 <Row>
 					<Col md='6'> 
@@ -75,10 +81,13 @@ class ResultPage extends Component {
    
    restart() {
 	   this.setState({ showHomePage: true });
+	   if (this.state.usePlainRefresh) {
+		   window.location.reload();
+	   }
    }
    
    renderRedirectHome() {
-	  return <ChoozeQuizPage restart={true} />
+	  return <ChoozeQuizPage />
    }
 
    render() {
