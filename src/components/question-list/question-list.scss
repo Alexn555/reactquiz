@@ -1,0 +1,43 @@
+
+$base-color: #f6f6f6;
+$active-cursor: pointer;
+$pagination-color: lightblue;
+
+.header-class {
+    background: $base-color;
+    position: sticky;
+    top: 0;
+}
+
+th { /* Chrome hack */
+    background: $base-color;
+    position: sticky;
+    top: 0;
+}
+
+.noSelectText {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.pageItemCl{
+    padding: 10px 15px 10px 15px;
+    background: $base-color;
+    border: 1px dashed #cccccc;
+    margin: 3px;
+}
+
+.page-item {
+    @extend .pageItemCl;
+}
+
+th:focus{
+    outline: none;
+}
+
+.header-class:focus {
+    outline: none;
+}

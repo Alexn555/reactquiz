@@ -1,0 +1,53 @@
+
+$base-color: #f6f6f6;
+$active-cursor: pointer;
+$wrapper-background: #f4f4f4;
+$bar-color: #00008b;
+
+.progress-bar-wrapper {
+    cursor: $active-cursor;
+    right: 0;
+    width: 300px;
+	height: 20px;
+    float: center;
+    margin: 20px 30px 10px 30px;
+    padding: 0;
+    font-size: 1.2em;
+	background: $wrapper-background;
+	border: 1px solid grey;
+	border-radius: 9px;
+	overflow: hidden;
+}
+
+.progress-bar-inner {
+	background: $bar-color;
+	height: 100%;
+}
+
+@mixin progressValue($currentIndex) { 
+  @extend .progress-bar-inner;
+  width: $currentIndex;
+}
+
+.progress-bar-15 {
+	@include progressValue(15%);
+}
+.progress-bar-30 {
+	@include progressValue(30%);
+}
+.progress-bar-50 {
+	@include progressValue(50%);
+}
+.progress-bar-75 {
+	@include progressValue(75%);
+}
+.progress-bar-90 {
+	@include progressValue(90%);
+}
+.progress-bar-full {
+	@include progressValue(100%);
+}
+
+
+
+

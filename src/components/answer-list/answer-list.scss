@@ -1,0 +1,23 @@
+
+$base-color: #f6f6f6;
+$active-cursor: pointer;
+$pagination-color: lightblue;
+$button-background: blue;
+
+.answers-wrapper {
+	border: 1px dashed blue;
+	border-radius: 5px;
+}
+
+.answer-item {
+    text-align: center;
+    margin: 10px 10px 10px 20px;
+    padding: 10px;
+    font-size: 1.2em;
+	background: $button-background;
+	
+	&:hover {
+		background: #00008B;
+	}
+}
+

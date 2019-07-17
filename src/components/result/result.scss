@@ -1,0 +1,29 @@
+
+$base-color: #f6f6f6;
+$pagination-color: lightblue;
+
+.result {
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.correct {
+	font-weight: bold;
+}
+
+.username{
+    font-size: larger;
+	font-weight: bold;
+}
+
+.bad {
+	color: red;
+}
+
+.semi {
+	color: orange;
+}
+
+.good {
+	color: green;
+}
