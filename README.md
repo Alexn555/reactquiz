@@ -28,7 +28,7 @@ cmd -> npm run test
 ## How to run
 
 ### The backend serve
-Backend data is coming from https://api.themoviedb.org/3/movie/popular
+Backend data is coming from correct backend server
 
 ## To view online
 http://norwaydict.com/reactquiz
