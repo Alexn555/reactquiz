@@ -31,7 +31,7 @@ cmd -> npm run test
 Backend data is coming from correct backend server
 
 ## To view online
-http://norwaydict.com/reactquiz
+https://alexn555-racing.com/projects/reactquiz
   Click on any link in the page 
   (it will for now mask as norwaydict main site hrefs, but it works as expected)
   
